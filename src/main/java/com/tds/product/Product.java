@@ -1,19 +1,19 @@
 package com.tds.product;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 // gói jakarta dùng version 3.x
 // gói javax dùng version 2.x
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "product") // auto map if the ClassName = TableName
 public class Product {
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "product_id")
     String productId;
     @Column(name = "product_name")
@@ -31,7 +31,7 @@ public class Product {
     @Column(name = "expired_date")
     Date expiredDate;
     @Column(name = "image")
-    String image;
+    byte[] image;
 
     public String getProductId() {
         return productId;
@@ -97,11 +97,11 @@ public class Product {
         this.expiredDate = expiredDate;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 }

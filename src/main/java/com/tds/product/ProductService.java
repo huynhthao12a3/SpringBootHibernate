@@ -6,7 +6,7 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    private IProductRepository productRepository;
+    private final IProductRepository productRepository;
 
     public ProductService(IProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -28,6 +28,7 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
+        System.out.println(product.getProductId());
         return productRepository.save(product);
     }
 }
