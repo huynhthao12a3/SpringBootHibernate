@@ -1,47 +1,55 @@
 package com.tds.product;
 
+import com.tds.response.ResponseObject;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "/tds/product")
 @RestController
 public class ProductController {
-
     public final ProductService productService;
+
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/getAllProduct")
-    public List<Product> getAllProducts() {
-        return productService.getAllProduct();
+    public ResponseObject<List<Product>> getAllProducts() {
+//        ResponseObject<List<Product>> responseObject = new ResponseObject<>();
+//        responseObject.setIsSuccess(true);
+//        responseObject.setMessage("Success");
+//        responseObject.setStatus(String.valueOf(HttpStatus.OK.value()));
+//        responseObject.setData(productService.getAllProduct());
+
+//        return responseObject(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.getAllProduct());
+        return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.getAllProduct());
     }
 
     @GetMapping("/getProductById")
-    public Product getProductById(@RequestParam("productId") String productId) {
-        return productService.getProductById(productId);
+    public ResponseObject<Product> getProductById(@RequestParam("productId") String productId) {
+        return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.getProductById(productId));
     }
 
     @GetMapping("/getProductByName")
-    public List<Product> getProductByName(@RequestParam("productName") String productName) {
-        return productService.getProductByName(productName);
+    public ResponseObject<List<Product>> getProductByName(@RequestParam("productName") String productName) {
+        return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.getProductByName(productName));
     }
 
-    // Practice: Design the delete function using product ID to delete it in Database
     @DeleteMapping("/deleteProductById")
-    public String deleteProductById(@RequestParam("productId") String productId) {
+    public ResponseObject<String> deleteProductById(@RequestParam("productId") String productId) {
         productService.deleteProductById(productId);
-        return "Product deleted successfully";
+        return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", "Product deleted successfully");
     }
 
-    // Practice: Design the create function to create a product in Database
     @PostMapping("/createProduct")
-    public Product createProduct(@RequestBody Product product) {
-        return productService.createProduct(product);
-//        return productService.getProductById(product.getProductId());
+    public ResponseObject<Product> createProduct(@RequestBody @Valid Product product) {
+        return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.createProduct(product));
     }
 }

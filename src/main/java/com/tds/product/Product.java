@@ -1,7 +1,9 @@
 package com.tds.product;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Value;
 
 // gói jakarta dùng version 3.x
 // gói javax dùng version 2.x
@@ -16,20 +18,31 @@ public class Product {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "product_id")
     String productId;
+
+    @Size(min = 10, message = "Product name must be at least 10 characters")
     @Column(name = "product_name")
     String productName;
+
     @Column(name = "remark")
     String remark;
+
+    @Min(value = 1000)
     @Column(name = "input_price")
     float inputPrice;
+
+    @Min(value = 1000)
     @Column(name = "output_price")
     float outputPrice;
+
     @Column(name = "input_date")
     Date inputDate;
+
     @Column(name = "quantity")
     int quantity;
+
     @Column(name = "expired_date")
     Date expiredDate;
+
     @Column(name = "image")
     byte[] image;
 
