@@ -14,8 +14,7 @@ import java.sql.Date;
 @Table(name = "product") // auto map if the ClassName = TableName
 public class Product {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "product_id")
     String productId;
 
@@ -26,7 +25,7 @@ public class Product {
     @Column(name = "remark")
     String remark;
 
-    @Min(value = 1000)
+    @Min(value = 1000, message = "Input price must be greater than or equal to 1000")
     @Column(name = "input_price")
     float inputPrice;
 
