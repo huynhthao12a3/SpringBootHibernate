@@ -15,17 +15,18 @@ public class GlobalExceptionHandler {
      * Bắt Exception khi Runtime
      * */
     @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<String> handleRuntimeException(RuntimeException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseObject<Object> handleRuntimeException(RuntimeException e) {
+        ResponseEntity<String> message = ResponseEntity.badRequest().body(e.getMessage());
+        return new ResponseObject<>(false, "Fail", message.getBody(), null);
     }
 
     /*
      * Bắt Exception, validation trong DTO
      * */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseObject<ResponseEntity> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        ResponseEntity<String> message =  ResponseEntity.badRequest().body(Objects.requireNonNull(e.getFieldError()).getDefaultMessage());
-        return new ResponseObject<ResponseEntity>(false,"Fail",message.getBody(),null);
+    public ResponseObject<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        ResponseEntity<String> message = ResponseEntity.badRequest().body(Objects.requireNonNull(e.getFieldError()).getDefaultMessage());
+        return new ResponseObject<>(false, "Fail", message.getBody(), null);
     }
 
 }

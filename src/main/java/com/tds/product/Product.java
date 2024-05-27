@@ -29,7 +29,7 @@ public class Product {
     @Column(name = "input_price")
     float inputPrice;
 
-    @Min(value = 1000)
+    @Min(value = 1000, message = "Input price must be greater than or equal to 1000")
     @Column(name = "output_price")
     float outputPrice;
 
