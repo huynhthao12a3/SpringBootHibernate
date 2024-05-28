@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/tds/file")
+@CrossOrigin(origins = "*")
 public class FileController {
     public final FileService fileService;
 
@@ -31,9 +35,8 @@ public class FileController {
     }
 
     @GetMapping("/files/{fileId}")
-    public ResponseObject<File> getFile(@PathVariable String fileId) {
-        File file = fileService.getFile(fileId);
-        return new ResponseObject<>(true, "Success", "Success", file);
+    public String getFile(@PathVariable String fileId) {
+        return fileService.getFile(fileId);
     }
 
 }

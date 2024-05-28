@@ -7,9 +7,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FileService {
@@ -39,13 +37,21 @@ public class FileService {
     public List<File> findAllFiles() {
         List<File> fileList = fileRepository.findAll();
         fileList.forEach(file -> {
-            String filePath = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(file.getFileId()).toUriString();
+            String filePath = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/" + file.getFileId()).toUriString();
             file.setFilePath(filePath);
         });
         return fileList;
     }
 
-    public File getFile(String fileId) {
-        return fileRepository.findById(fileId).get();
+    public String getFile(String fileId) {
+        File file = fileRepository.findById(fileId).orElse(null);
+//        byte[] fileContent = Objects.requireNonNull(file).getFileContent();
+        if (file != null) {
+            String fileType = file.getFileType().substring(file.getFileType().lastIndexOf(".") + 1);
+            String base64String = Base64.getEncoder().encodeToString(file.getFileContent());
+            return "data:image/"+ fileType +";base64," + base64String;
+        }
+        return "";
+//        System.out.println(Arrays.toString(fileContent));
     }
 }

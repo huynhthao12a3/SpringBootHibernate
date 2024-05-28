@@ -3,7 +3,7 @@ package com.tds.file;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "files")
+//@Table(name = "files")
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

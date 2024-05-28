@@ -7,8 +7,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IProductRepository extends JpaRepository<Product, String> {
-    @Query(value = "select * from product where product_name like %:keyword%", nativeQuery = true)
+    @Query(value = "select * from product where upper(product_name) like %:keyword%", nativeQuery = true)
     List<Product> findProductListByName(@Param("keyword") String productName);
-
-    List<Product> findProductByOutputPriceBetweenOrderByOutputPriceDesc(Double lower, Double higher);
 }
