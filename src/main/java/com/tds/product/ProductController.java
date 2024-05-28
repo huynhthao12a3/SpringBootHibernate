@@ -45,11 +45,12 @@ public class ProductController {
     @DeleteMapping("/deleteProductById")
     public ResponseObject<String> deleteProductById(@RequestParam("productId") String productId) {
         productService.deleteProductById(productId);
-        return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", "Product deleted successfully");
+        return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Product deleted successfully", productId);
     }
 
     @PostMapping("/createProduct")
     public ResponseObject<Product> createProduct(@RequestBody @Valid Product product) {
+        System.out.println(product);
         return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.createProduct(product));
     }
 }

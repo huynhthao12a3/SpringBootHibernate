@@ -1,0 +1,39 @@
+package com.tds.file;
+
+import com.tds.response.ResponseObject;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = "/tds/file")
+public class FileController {
+    public final FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @PostMapping("/save-file")
+    public ResponseObject<File> saveFile(@RequestParam("file") MultipartFile file) throws IOException {
+        return new ResponseObject<>(true, "Success", "Saved file successfully", fileService.saveFile(file));
+    }
+
+    @GetMapping("/files")
+    public ResponseObject<List<File>> getFiles() {
+        List<File> fileList = fileService.findAllFiles();
+        return new ResponseObject<>(true, "Success", "Success", fileList);
+    }
+
+    @GetMapping("/files/{fileId}")
+    public ResponseObject<File> getFile(@PathVariable String fileId) {
+        File file = fileService.getFile(fileId);
+        return new ResponseObject<>(true, "Success", "Success", file);
+    }
+
+}
