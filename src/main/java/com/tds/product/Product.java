@@ -43,7 +43,7 @@ public class Product {
     Date expiredDate;
 
     @Column(name = "image")
-    byte[] image;
+    String image;
 
     public String getProductId() {
         return productId;
@@ -109,11 +109,11 @@ public class Product {
         this.expiredDate = expiredDate;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

@@ -1,5 +1,6 @@
 package com.tds.file;
 
+import com.tds.response.FileResponse;
 import com.tds.response.ResponseObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
@@ -29,14 +31,14 @@ public class FileController {
     }
 
     @GetMapping("/files")
-    public ResponseObject<List<File>> getFiles() {
-        List<File> fileList = fileService.findAllFiles();
+    public ResponseObject<List<FileResponse>> getFiles() {
+        List<FileResponse> fileList = fileService.findAllFiles();
         return new ResponseObject<>(true, "Success", "Success", fileList);
     }
 
-    @GetMapping("/files/{fileId}")
-    public String getFile(@PathVariable String fileId) {
-        return fileService.getFile(fileId);
+    @GetMapping("/files/{filePath}")
+    public ResponseObject<Object> getFile(@PathVariable String filePath) {
+        return new ResponseObject<>(true, "Success", "Success", fileService.getFile(filePath));
     }
 
 }

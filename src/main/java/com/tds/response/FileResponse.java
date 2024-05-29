@@ -1,12 +1,9 @@
-package com.tds.file;
+package com.tds.response;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-@Entity
-@Table(name = "files")
-public class File {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class FileResponse {
     String fileId;
 
     String fileName;
@@ -17,18 +14,18 @@ public class File {
 
     String filePath;
 
-    byte[] fileContent;
+    String fileData;
 
-    public File() {
+    public FileResponse() {
     }
 
-    public File(String fileId, String fileName, String fileType, String fileSize, String filePath, byte[] fileContent) {
+    public FileResponse(String fileId, String fileName, String fileType, String fileSize, String filePath, String fileData) {
         this.fileId = fileId;
         this.fileName = fileName;
         this.fileType = fileType;
         this.fileSize = fileSize;
         this.filePath = filePath;
-        this.fileContent = fileContent;
+        this.fileData = fileData;
     }
 
     public String getFileId() {
@@ -71,11 +68,11 @@ public class File {
         this.filePath = filePath;
     }
 
-    public byte[] getFileContent() {
-        return fileContent;
+    public String getFileData() {
+        return fileData;
     }
 
-    public void setFileContent(byte[] fileContent) {
-        this.fileContent = fileContent;
+    public void setFileData(String fileData) {
+        this.fileData = fileData;
     }
 }
