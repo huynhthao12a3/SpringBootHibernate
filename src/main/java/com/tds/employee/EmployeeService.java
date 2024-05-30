@@ -22,7 +22,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeeByName(String employeeName) {
-        return employeeRepository.findEmployeeListByName(employeeName);
+        return employeeRepository.findEmployeeListByName(employeeName.toUpperCase());
     }
 
     public void deleteEmployeeById(String employeeId) {

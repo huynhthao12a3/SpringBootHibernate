@@ -1,9 +1,6 @@
 package com.tds.employee;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -11,18 +8,25 @@ import java.sql.Date;
 @Table(name = "employee")
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "employee_id")
     String employeeId;
+
     @Column(name = "employee_name")
     String employeeName;
+
     @Column(name = "employee_phone")
     String employeePhone;
+
     @Column(name = "employee_email")
     String employeeEmail;
+
     @Column(name = "employee_address")
     String employeeAddress;
+
     @Column(name = "employee_hire_date")
     Date employeeHireDate;
+    
     @Column(name = "employee_end_date")
     Date employeeEndDate;
 

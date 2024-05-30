@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IEmployeeRepository extends JpaRepository<Employee, String> {
-    @Query(value = "select * from employee where employee_name like %:keyword%", nativeQuery = true)
+    @Query(value = "select * from employee where upper(employee_name) like %:keyword%", nativeQuery = true)
     List<Employee> findEmployeeListByName(@Param("keyword") String employeeName);
 
 }
