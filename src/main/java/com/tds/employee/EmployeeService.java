@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
-    private IEmployeeRepository employeeRepository;
+    private final IEmployeeRepository employeeRepository;
 
     public EmployeeService(IEmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -18,7 +18,7 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(String id) {
-        return employeeRepository.findById(id).get();
+        return employeeRepository.findById(id).orElse(null);
     }
 
     public List<Employee> getEmployeeByName(String employeeName) {

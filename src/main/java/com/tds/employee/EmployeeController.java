@@ -9,32 +9,33 @@ import java.util.List;
 @RestController
 public class EmployeeController {
     public final EmployeeService employeeService;
+
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/getAllEmployees")
+    @GetMapping("/get-all-employees")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/getEmployeeById")
+    @GetMapping("/get-employee-by-id")
     public Employee getEmployeeById(@RequestParam("employeeId") String employeeId) {
         return employeeService.getEmployeeById(employeeId);
     }
 
-    @GetMapping("/getEmployeeByName")
+    @GetMapping("/get-employee-by-name")
     public List<Employee> getEmployeeByName(@RequestParam("employeeName") String employeeName) {
         return employeeService.getEmployeeByName(employeeName);
     }
 
-    @DeleteMapping("/deleteEmployeeById")
+    @DeleteMapping("/delete-employee-by-id")
     public String deleteEmployeeById(@RequestParam("employeeId") String employeeId) {
         employeeService.deleteEmployeeById(employeeId);
         return "Employee deleted successfully";
     }
 
-    @PostMapping("/createEmployee")
+    @PostMapping("/create-employee")
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
     }

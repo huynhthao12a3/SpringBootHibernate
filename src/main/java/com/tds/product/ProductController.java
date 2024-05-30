@@ -20,7 +20,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/getAllProduct")
+    @GetMapping("/get-all-product")
     public ResponseObject<List<Product>> getAllProducts() {
 //        ResponseObject<List<Product>> responseObject = new ResponseObject<>();
 //        responseObject.setIsSuccess(true);
@@ -32,23 +32,23 @@ public class ProductController {
         return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.getAllProduct());
     }
 
-    @GetMapping("/getProductById")
+    @GetMapping("/get-product-by-id")
     public ResponseObject<Product> getProductById(@RequestParam("productId") String productId) {
         return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.getProductById(productId));
     }
 
-    @GetMapping("/getProductByName")
+    @GetMapping("/get-product-by-name")
     public ResponseObject<List<Product>> getProductByName(@RequestParam("productName") String productName) {
         return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.getProductByName(productName));
     }
 
-    @DeleteMapping("/deleteProductById")
+    @DeleteMapping("/delete-product-by-id")
     public ResponseObject<String> deleteProductById(@RequestParam("productId") String productId) {
         productService.deleteProductById(productId);
         return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Product deleted successfully", productId);
     }
 
-    @PostMapping("/createProduct")
+    @PostMapping("/create-product")
     public ResponseObject<Product> createProduct(@RequestBody @Valid Product product) {
         System.out.println(product);
         return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", productService.createProduct(product));
