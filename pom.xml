@@ -19,6 +19,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <java.version>17</java.version>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -78,8 +79,17 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.1.1</version>
             </plugin>
         </plugins>
     </build>
+
+    <!--    <distributionManagement>-->
+    <!--        <repository>-->
+    <!--            <uniqueVersion>false</uniqueVersion>-->
+    <!--            <id>corp1</id>-->
+    <!--            <name>Corporate Repository</name>-->
+    <!--            <url>scp://repo/maven2</url>-->
+    <!--            <layout>default</layout>-->
+    <!--        </repository>-->
+    <!--    </distributionManagement>-->
 </project>
