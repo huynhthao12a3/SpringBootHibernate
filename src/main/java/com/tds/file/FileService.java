@@ -67,4 +67,10 @@ public class FileService {
         }
         return "";
     }
+
+    public File deleteFile(String filePath) {
+        File file = fileRepository.findByFilePathEndsWith(filePath);
+        fileRepository.deleteById(file.getFileId());
+        return file;
+    }
 }

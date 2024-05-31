@@ -3,6 +3,7 @@ package com.tds.file;
 import com.tds.response.FileResponse;
 import com.tds.response.ResponseObject;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,18 +28,23 @@ public class FileController {
 
     @PostMapping("/save-file")
     public ResponseObject<File> saveFile(@RequestParam("file") MultipartFile file) throws IOException {
-        return new ResponseObject<>(true, "Success", "Saved file successfully", fileService.saveFile(file));
+        return new ResponseObject<>(true, HttpStatus.OK.toString(), "Saved file successfully", fileService.saveFile(file));
     }
 
     @GetMapping("/files")
     public ResponseObject<List<FileResponse>> getFiles() {
         List<FileResponse> fileList = fileService.findAllFiles();
-        return new ResponseObject<>(true, "Success", "Success", fileList);
+        return new ResponseObject<>(true, HttpStatus.OK.toString(), "Success", fileList);
     }
 
     @GetMapping("/files/{filePath}")
     public ResponseObject<Object> getFile(@PathVariable String filePath) {
-        return new ResponseObject<>(true, "Success", "Success", fileService.getFile(filePath));
+        return new ResponseObject<>(true, HttpStatus.OK.toString(), "Success", fileService.getFile(filePath));
+    }
+
+    @DeleteMapping("/delete-file")
+    public ResponseObject<Object> deleteFile(@RequestParam("filePath") String filePath) {
+        return new ResponseObject<>(true, HttpStatus.OK.toString(), "Success", fileService.deleteFile(filePath));
     }
 
 }
