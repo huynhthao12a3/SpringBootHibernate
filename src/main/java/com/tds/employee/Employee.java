@@ -1,6 +1,7 @@
 package com.tds.employee;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.sql.Date;
 
@@ -10,25 +11,30 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "employee_id")
-    String employeeId;
+    private String employeeId;
 
+    @NotNull(message = "Name can not null")
     @Column(name = "employee_name")
-    String employeeName;
+    private String employeeName;
 
+    @Size(min = 10, max = 12, message = "Phone only has 10 to 12 numbers")
     @Column(name = "employee_phone")
-    String employeePhone;
+    private String employeePhone;
 
+    @Email(message = "Email must be correct format")
     @Column(name = "employee_email")
-    String employeeEmail;
+    private String employeeEmail;
 
     @Column(name = "employee_address")
-    String employeeAddress;
+    private String employeeAddress;
 
+    @NotNull(message = "Please change Hire Date")
     @Column(name = "employee_hire_date")
-    Date employeeHireDate;
-    
+    private Date employeeHireDate;
+
+    @NotNull(message = "Please change Expired Date")
     @Column(name = "employee_end_date")
-    Date employeeEndDate;
+    private Date employeeEndDate;
 
     public String getEmployeeId() {
         return employeeId;

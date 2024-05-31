@@ -1,6 +1,7 @@
 package com.tds.employee;
 
 import com.tds.response.ResponseObject;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/create-employee")
-    public ResponseObject<Employee> createEmployee(@RequestBody Employee employee) {
+    public ResponseObject<Employee> createEmployee(@RequestBody @Valid Employee employee) {
         return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", employeeService.createEmployee(employee));
     }
 }

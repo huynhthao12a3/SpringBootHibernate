@@ -16,34 +16,37 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "product_id")
-    String productId;
+    private String productId;
 
     @Size(min = 10, message = "Product name must be at least 10 characters")
     @Column(name = "product_name")
-    String productName;
+    private String productName;
 
     @Column(name = "remark")
-    String remark;
+    private String remark;
 
     @Min(value = 1000, message = "Input price must be greater than or equal to 1000")
     @Column(name = "input_price")
-    float inputPrice;
+    private float inputPrice;
 
     @Min(value = 1000, message = "Input price must be greater than or equal to 1000")
     @Column(name = "output_price")
-    float outputPrice;
+    private float outputPrice;
 
+    @NotNull(message = "Please change Input Date")
     @Column(name = "input_date")
-    Date inputDate;
+    private Date inputDate;
 
+    @NotNull(message = "Please change Quantity")
     @Column(name = "quantity")
-    int quantity;
+    private int quantity;
 
+    @NotNull(message = "Please change Expired Date")
     @Column(name = "expired_date")
-    Date expiredDate;
+    private Date expiredDate;
 
     @Column(name = "image")
-    String image;
+    private String image;
 
     public String getProductId() {
         return productId;
