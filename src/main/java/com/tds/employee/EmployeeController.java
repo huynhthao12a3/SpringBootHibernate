@@ -3,6 +3,8 @@ package com.tds.employee;
 import com.tds.response.ResponseObject;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "/tds/employee")
 @RestController
+@EnableScheduling
 public class EmployeeController {
     public final EmployeeService employeeService;
 
@@ -17,6 +20,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @Scheduled(cron = "0 5,25,45 * ? * *")
     @GetMapping("/get-all-employees")
     public ResponseObject<List<Employee>> getAllEmployees() {
         return new ResponseObject<>(true, String.valueOf(HttpStatus.OK.value()), "Success", employeeService.getAllEmployees());
